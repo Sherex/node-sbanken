@@ -1,0 +1,39 @@
+{
+  "name": "node-sbanken",
+  "version": "0.1.0",
+  "description": "Client for SBanken",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "dev": "ts-node-dev --no-notify src/index.ts",
+    "dev-watch": "ts-node-dev --respawn --no-notify src/index.ts",
+    "lint": "eslint src/",
+    "lint:fix": "eslint --fix src/",
+    "spec:update-all": "ts-node tools/update-specs.ts",
+    "spec:lint": "eslint src/lib/*.types.ts",
+    "spec:lint:fix": "eslint --fix src/lib/*.types.ts",
+    "test": "npm run lint"
+  },
+  "keywords": [
+    "sbanken"
+  ],
+  "author": "Ingar Helgesen (https://github.com/sherex)",
+  "license": "MIT",
+  "devDependencies": {
+    "@manifoldco/swagger-to-ts": "^2.0.0",
+    "@types/node": "^14.0.22",
+    "@typescript-eslint/eslint-plugin": "^3.6.0",
+    "eslint": "^7.4.0",
+    "eslint-config-standard-with-typescript": "^18.0.2",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "ts-node-dev": "^1.0.0-pre.50",
+    "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0"
+  }
+}
