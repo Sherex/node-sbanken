@@ -32,3 +32,27 @@ export interface TokenData {
     'Exec.Customers.Customers.read_access'
   ]
 }
+
+type ErrorTypes =
+  | 'System'
+  | 'Input'
+  | 'State'
+  | 'ServiceUnavailable'
+  | 'CustomHttpStatus'
+  | 'NotFound'
+
+interface ErrorBody {
+  errorType?: ErrorTypes
+  isError?: boolean
+  errorCode?: number | null
+  errorMessage?: string | null
+  traceId?: string | null
+}
+
+export class APIError extends Error {
+  public readonly sbankenError: ErrorBody
+  constructor (message: string | undefined, sbankenError: ErrorBody) {
+    super(message)
+    this.sbankenError = sbankenError
+  }
+}

@@ -1,17 +1,20 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import * as SBanken from '../types/sbanken.types'
 import toUrlEncodedFormData from './to-url-encoded-form-data'
 import {
   TokenAPIResponse,
   APIAccounts,
   APIAccount,
-  APICustomer
+  APICustomer,
+  Account,
+  Customer
 } from '../types/sbanken-api.types'
 
 export default class SBankenClient {
   private readonly client: AxiosInstance
   private readonly options: SBanken.ClientOptionsData
   private tokenData: SBanken.TokenData | undefined
+  public lastResponseRaw: AxiosResponse | undefined
 
   constructor (options: SBanken.ClientParamOptions) {
     if (typeof options.baseUrlApi !== 'string') options.baseUrlApi = 'https://api.sbanken.no'
@@ -64,24 +67,35 @@ export default class SBankenClient {
     this.client.defaults.headers.common.Authorization = bearerToken
   }
 
-  async getAccounts (): Promise<APIAccounts> {
+  async getAccounts (): Promise<Account[]> {
     await this.updateClientToken()
-    const { data } = await this.client.get('/exec.bank/api/v1/accounts')
+    const response = await this.client.get('/exec.bank/api/v1/accounts')
+    this.lastResponseRaw = response
+    const data = response.data as APIAccounts
 
-    return data as APIAccounts
+    if (!Array.isArray(data.items)) throw new SBanken.APIError('Received invalid response body. See \'.sbankenError\' for details', data)
+
+    return data.items
   }
 
-  async getAccount (accountId?: string): Promise<APIAccount> {
+  async getAccount (accountId: string): Promise<Account> {
+    if (typeof accountId !== 'string') throw new Error('Missing required argument \'accountId\'!')
     await this.updateClientToken()
-    const { data } = await this.client.get(`/exec.bank/api/v1/accounts/${accountId !== undefined ? accountId : ''}`)
+    const response = await this.client.get(`/exec.bank/api/v1/accounts/${accountId}`)
+    const data = response.data as APIAccount
 
-    return data as APIAccount
+    if (typeof data.item !== 'object') throw new SBanken.APIError('Received invalid response body. See \'.sbankenError\' for details', data)
+
+    return data.item
   }
 
-  async getCustomer (): Promise<APICustomer> {
+  async getCustomer (): Promise<Customer> {
     await this.updateClientToken()
-    const { data } = await this.client.get('/exec.customers/api/v1/Customers')
+    const response = await this.client.get('/exec.customers/api/v1/Customers')
+    const data = response.data as APICustomer
 
-    return data as APICustomer
+    if (typeof data.item !== 'object') throw new SBanken.APIError('Received invalid response body. See \'.sbankenError\' for details', data)
+
+    return data.item
   }
 }
