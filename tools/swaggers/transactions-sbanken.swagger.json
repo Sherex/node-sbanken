@@ -1,0 +1,344 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Transactions API",
+    "description": "API for transactions functions",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/exec.bank"
+    }
+  ],
+  "paths": {
+    "/api/v1/Transactions/{accountId}": {
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "This operation returns the latest transactions of the given account within the time span set by the start and end date parameters. \r\n\r\nNote that dateTime type parameters are relative to Central European Time (GMT+1); only the date part is relevant.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "header",
+            "description": "The `customerId` of the customer.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The `accountId` of the account. The account must be one owned by the customer, or an account the customer has been granted access to. An account's accountId can be retrieved with the list or read operation on the Accounts service.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "*Optional*. The start of the query time span. Must be less than or equal to `endDate`, and less than or equal to the current date + 1 day. Default value is `endDate` -30 days. Minimum value is `2000-01-01`",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "*Optional*. The end of the query time span. Must be greater than or equal to `startDate`, and less than or equal to the current date +1 day. Query cannot span more than 366 days. Default value is the current date.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "description": "*Optional*. The `index` of the first item to be retrieved. Minimum value is `0`, which is the first item within the query time span. Default value is `0`.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "length",
+            "in": "query",
+            "description": "*Optional*. Return a number of items items up to this value. Minimum value is `1`, maximum value is `1000`. The default value is `100`.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResult.Transaction.v1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResult.Transaction.v1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResult.Transaction.v1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ReservationType.v1": {
+        "enum": [
+          "NotReservation",
+          "VisaReservation",
+          "PurchaseReservation",
+          "AtmReservation"
+        ],
+        "type": "string"
+      },
+      "SourceType.v1": {
+        "enum": [
+          "AccountStatement",
+          "Archive"
+        ],
+        "type": "string"
+      },
+      "CardDetails.v1": {
+        "type": "object",
+        "properties": {
+          "cardNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "currencyRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "merchantCategoryCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "merchantCategoryDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "merchantCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "merchantName": {
+            "type": "string",
+            "nullable": true
+          },
+          "originalCurrencyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "purchaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "transactionId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TransactionDetail.v1": {
+        "type": "object",
+        "properties": {
+          "formattedAccountNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cid": {
+            "type": "string",
+            "nullable": true
+          },
+          "amountDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "receiverName": {
+            "type": "string",
+            "nullable": true
+          },
+          "numericReference": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "payerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Transaction.v1": {
+        "type": "object",
+        "properties": {
+          "accountingDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "interestDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "otherAccountNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "otherAccountNumberSpecified": {
+            "type": "boolean"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionType": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionTypeCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "transactionTypeText": {
+            "type": "string",
+            "nullable": true
+          },
+          "isReservation": {
+            "type": "boolean"
+          },
+          "reservationType": {
+            "$ref": "#/components/schemas/ReservationType.v1"
+          },
+          "source": {
+            "$ref": "#/components/schemas/SourceType.v1"
+          },
+          "cardDetailsSpecified": {
+            "type": "boolean"
+          },
+          "cardDetails": {
+            "$ref": "#/components/schemas/CardDetails.v1"
+          },
+          "transactionDetailSpecified": {
+            "type": "boolean"
+          },
+          "transactionDetail": {
+            "$ref": "#/components/schemas/TransactionDetail.v1"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorType.": {
+        "enum": [
+          "System",
+          "Input",
+          "State",
+          "ServiceUnavailable",
+          "CustomHttpStatus",
+          "NotFound"
+        ],
+        "type": "string"
+      },
+      "ListResult.Transaction.v1": {
+        "type": "object",
+        "properties": {
+          "availableItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction.v1"
+            },
+            "nullable": true
+          },
+          "errorType": {
+            "$ref": "#/components/schemas/ErrorType."
+          },
+          "isError": {
+            "type": "boolean"
+          },
+          "errorCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "traceId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}

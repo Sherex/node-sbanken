@@ -6,8 +6,10 @@ import {
   APIAccounts,
   APIAccount,
   APICustomer,
+  APITransactions,
   Account,
-  Customer
+  Customer,
+  Transaction
 } from '../types/sbanken-api.types'
 
 export default class SBankenClient {
@@ -97,5 +99,17 @@ export default class SBankenClient {
     if (typeof data.item !== 'object') throw new SBanken.APIError('Received invalid response body. See \'.sbankenError\' for details', data)
 
     return data.item
+  }
+
+  async getTransactions (accountId: string): Promise<Transaction[]> {
+    if (typeof accountId !== 'string') throw new Error('Missing required argument \'accountId\'!')
+    await this.updateClientToken()
+    const response = await this.client.get(`/exec.bank/api/v1/Transactions/${accountId}`)
+    this.lastResponseRaw = response
+    const data = response.data as APITransactions
+
+    if (!Array.isArray(data.items)) throw new SBanken.APIError('Received invalid response body. See \'.sbankenError\' for details', data)
+
+    return data.items
   }
 }

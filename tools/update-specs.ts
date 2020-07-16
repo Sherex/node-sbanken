@@ -4,13 +4,13 @@ import fs from 'fs/promises'
 
 const swaggerSchemas = {
   'accounts-sbanken': 'https://api.sbanken.no/exec.bank/swagger/accounts_v1/swagger.json',
-  'customers-sbanken': 'https://api.sbanken.no/exec.customers/swagger/customers_v1/swagger.json'
+  'customers-sbanken': 'https://api.sbanken.no/exec.customers/swagger/customers_v1/swagger.json',
+  'transactions-sbanken': 'https://api.sbanken.no/exec.bank/swagger/transactions_v1/swagger.json'
   // 'myprofiles-sbanken': 'https://api.sbanken.no/exec.customers/swagger/myprofiles_v1/swagger.json',
   // 'cards-sbanken': 'https://api.sbanken.no/exec.bank/swagger/cards_v1/swagger.json',
   // 'efakturas-sbanken': 'https://api.sbanken.no/exec.bank/swagger/efakturas_v1/swagger.json',
   // 'payments-sbanken': 'https://api.sbanken.no/exec.bank/swagger/payments_v1/swagger.json',
   // 'standingorders-sbanken': 'https://api.sbanken.no/exec.bank/swagger/standingorders_v1/swagger.json',
-  // 'transactions-sbanken': 'https://api.sbanken.no/exec.bank/swagger/transactions_v1/swagger.json',
   // 'transfers-sbanken': 'https://api.sbanken.no/exec.bank/swagger/transfers_v1/swagger.json'
 }
 

@@ -12,7 +12,14 @@ const client = new SBanken({
 
 ;(async () => {
   console.log('##### Accounts')
-  console.log(await client.getAccounts())
+  const accounts = await client.getAccounts()
+  console.log(accounts[0].balance)
+
   console.log('##### Customer')
-  console.log(await client.getCustomer())
+  const customer = await client.getCustomer()
+  console.log(customer.firstName)
+
+  console.log('##### Transactions')
+  const transactions = await client.getTransactions(accounts[0].accountId!)
+  console.log(transactions)
 })()
