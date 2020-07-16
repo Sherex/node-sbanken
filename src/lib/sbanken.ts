@@ -101,10 +101,17 @@ export default class SBankenClient {
     return data.item
   }
 
-  async getTransactions (accountId: string): Promise<Transaction[]> {
+  async getTransactions (accountId: string, options?: SBanken.TransactionParamOptions): Promise<Transaction[]> {
     if (typeof accountId !== 'string') throw new Error('Missing required argument \'accountId\'!')
     await this.updateClientToken()
-    const response = await this.client.get(`/exec.bank/api/v1/Transactions/${accountId}`)
+    let query = toUrlEncodedFormData({
+      startDate: options?.startDate,
+      endDate: options?.endDate,
+      index: options?.index,
+      length: options?.length
+    }).toString()
+    query = query !== '' ? `?${query}` : ''
+    const response = await this.client.get(`/exec.bank/api/v1/Transactions/${accountId}${query}`)
     this.lastResponseRaw = response
     const data = response.data as APITransactions
 

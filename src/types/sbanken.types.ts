@@ -33,6 +33,26 @@ export interface TokenData {
   ]
 }
 
+/**
+ * Parameters for the `.getTransactions` method
+ */
+export interface TransactionParamOptions {
+  /**
+   * The start of the query time span. Must be less than or equal to `endDate`, and less than or equal to the current date + 1 day.
+   * Default value is `endDate` -30 days. Minimum value is `2000-01-01`. (Note: relative to GMT+1)
+   */
+  startDate?: string
+  /**
+   * The end of the query time span. Must be greater than or equal to startDate, and less than or equal to the current date +1 day.
+   * Query cannot span more than 366 days. Default value is the current date. (Note: relative to GMT+1)
+   * */
+  endDate?: string
+  /** The index of the first item to be retrieved. Minimum value is `0`, which is the first item within the query time span. Default value is `0`. */
+  index?: string
+  /** Return a number of items items up to this value. Minimum value is `1`, maximum value is `1000`. The default value is `100`. */
+  length?: string
+}
+
 type ErrorTypes =
   | 'System'
   | 'Input'
