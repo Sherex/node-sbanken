@@ -5,13 +5,13 @@
   "main": "src/index.js",
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "dev": "ts-node-dev --no-notify src/index.ts",
+    "dev": "ts-node-dev --no-notify",
     "dev-watch": "ts-node-dev --respawn --no-notify src/index.ts",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix src/",
     "spec:update-all": "ts-node tools/update-specs.ts",
-    "spec:lint": "eslint src/lib/*.types.ts",
-    "spec:lint:fix": "eslint --fix src/lib/*.types.ts",
+    "spec:lint": "eslint src/types/*.types.ts",
+    "spec:lint:fix": "eslint --fix src/types/*.types.ts",
     "test": "npm run lint"
   },
   "keywords": [
