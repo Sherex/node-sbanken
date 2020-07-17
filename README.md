@@ -1,4 +1,5 @@
 # SBanken NodeJS Client
+![Tests](https://github.com/Sherex/node-sbanken/workflows/Tests/badge.svg) ![Publish](https://github.com/Sherex/node-sbanken/workflows/Publish/badge.svg)  
 A node module written in Typescript for interacting with SBanken's API.
 
 ## Creating your ID and secret
