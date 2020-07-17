@@ -1,5 +1,6 @@
 # SBanken NodeJS Client
-![Tests](https://github.com/Sherex/node-sbanken/workflows/Tests/badge.svg) ![Publish](https://github.com/Sherex/node-sbanken/workflows/Publish/badge.svg)  
+[![GitHub Workflow Tests](https://img.shields.io/github/workflow/status/sherex/node-sbanken/Tests?label=Tests&style=for-the-badge)](https://github.com/Sherex/node-sbanken)[![GitHub Workflow Publish](https://img.shields.io/github/workflow/status/sherex/node-sbanken/Publish?label=Publish&style=for-the-badge)](https://github.com/Sherex/node-sbanken)[![NPM Version](https://img.shields.io/npm/v/@sherex/sbanken?style=for-the-badge)](https://www.npmjs.com/package/@sherex/sbanken)  
+
 A node module written in Typescript for interacting with SBanken's API.
 
 ## Creating your ID and secret
