@@ -2,7 +2,7 @@
 A node module written in Typescript for interacting with SBanken's API.
 
 ## Creating your ID and secret
-> If these steps are outdated you can find the updated instructions [here](https://sbanken.no/bruke/utviklerportalen/)
+> If these steps are outdated you can find the updated instructions [here](https://sbanken.no/bruke/utviklerportalen/) and please create an issue or PR here :)
 1. Enable the Beta program on your account.
   You can do this on the [Beta settings page](https://secure.sbanken.no/Home/Settings/BetaProgram).
 2. Then goto your [API overview page](https://secure.sbanken.no/Personal/ApiBeta/Info) to register a new application.
@@ -12,10 +12,9 @@ A node module written in Typescript for interacting with SBanken's API.
 5. Your `customerId` is your [norwegian "personnummer" (11 digits)](https://en.wikipedia.org/wiki/National_identification_number#Norway)
 
 ## Usage
+### Typescript
 ```typescript
 import { SBanken } from '@sherex/sbanken'
-// OR
-const { SBanken } = require('@sherex/sbanken')
 
 const client = new SBanken({
   applicationId: process.env.SB_APPLICATION_ID!,
@@ -34,6 +33,36 @@ const client = new SBanken({
 
   console.log('##### Transactions')
   const transactions = await client.getTransactions(accounts[0].accountId!, {
+    startDate: '2020-04-01',
+    endDate: '2020-06-14',
+    index: '20',
+    length: '30'
+  })
+  console.log(transactions.length)
+})()
+```
+
+### Javascript
+```javascript
+const { SBanken } = require('@sherex/sbanken')
+
+const client = new SBanken({
+  applicationId: process.env.SB_APPLICATION_ID,
+  applicationSecret: process.env.SB_APPLICATION_SECRET,
+  customerId: process.env.SB_CUSTOMER_ID
+})
+
+;(async () => {
+  console.log('##### Accounts')
+  const accounts = await client.getAccounts()
+  console.log(accounts[0].balance)
+
+  console.log('##### Customer')
+  const customer = await client.getCustomer()
+  console.log(`${customer.firstName} ${customer.lastName}`)
+
+  console.log('##### Transactions')
+  const transactions = await client.getTransactions(accounts[0].accountId, {
     startDate: '2020-04-01',
     endDate: '2020-06-14',
     index: '20',
