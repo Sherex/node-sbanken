@@ -14,13 +14,15 @@ A node module written in Typescript for interacting with SBanken's API.
 ## Usage
 ### Typescript
 ```typescript
-import { SBanken } from '@sherex/sbanken'
+import { SBanken, ClientParamOptions } from '@sherex/sbanken'
 
-const client = new SBanken({
+const options: ClientParamOptions = {
   applicationId: process.env.SB_APPLICATION_ID!,
   applicationSecret: process.env.SB_APPLICATION_SECRET!,
   customerId: process.env.SB_CUSTOMER_ID!
-})
+}
+
+const client = new SBanken(options)
 
 ;(async () => {
   console.log('##### Accounts')
@@ -32,12 +34,13 @@ const client = new SBanken({
   console.log(`${customer.firstName} ${customer.lastName}`)
 
   console.log('##### Transactions')
-  const transactions = await client.getTransactions(accounts[0].accountId!, {
+  const transactionsOptions: TransactionParamOptions = {
     startDate: '2020-04-01',
     endDate: '2020-06-14',
     index: '20',
     length: '30'
-  })
+  }
+  const transactions = await client.getTransactions(accounts[0].accountId!, transactionsOptions)
   console.log(transactions.length)
 })()
 ```
@@ -46,11 +49,13 @@ const client = new SBanken({
 ```javascript
 const { SBanken } = require('@sherex/sbanken')
 
-const client = new SBanken({
+const options = {
   applicationId: process.env.SB_APPLICATION_ID,
   applicationSecret: process.env.SB_APPLICATION_SECRET,
   customerId: process.env.SB_CUSTOMER_ID
-})
+}
+
+const client = new SBanken(options)
 
 ;(async () => {
   console.log('##### Accounts')

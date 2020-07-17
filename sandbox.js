@@ -1,11 +1,13 @@
 require('dotenv').config()
 const { SBanken } = require('./dist')
 
-const client = new SBanken({
+const options = {
   applicationId: process.env.SB_APPLICATION_ID,
   applicationSecret: process.env.SB_APPLICATION_SECRET,
   customerId: process.env.SB_CUSTOMER_ID
-})
+}
+
+const client = new SBanken(options)
 
 ;(async () => {
   console.log('##### Accounts')
