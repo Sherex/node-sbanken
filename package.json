@@ -1,8 +1,11 @@
 {
-  "name": "sbanken",
-  "version": "0.1.0",
-  "description": "Client for SBanken",
-  "main": "src/index.js",
+  "name": "@sherex/sbanken",
+  "version": "1.0.0",
+  "description": "A node module written in Typescript for interacting with SBanken's API",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev --no-notify",
@@ -18,6 +21,7 @@
     "s-banken",
     "bank",
     "banken",
+    "api",
     "client",
     "node",
     "typescript",
@@ -26,20 +30,20 @@
   "author": "Ingar Helgesen (https://github.com/sherex)",
   "license": "MIT",
   "devDependencies": {
-    "@manifoldco/swagger-to-ts": "^2.0.0",
-    "@types/node": "^14.0.22",
-    "@typescript-eslint/eslint-plugin": "^3.6.0",
-    "dotenv": "^8.2.0",
-    "eslint": "^7.4.0",
-    "eslint-config-standard-with-typescript": "^18.0.2",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "ts-node-dev": "^1.0.0-pre.50",
-    "typescript": "^3.3.3"
+    "@manifoldco/swagger-to-ts": "2.0.0",
+    "@types/node": "14.0.23",
+    "@typescript-eslint/eslint-plugin": "3.6.1",
+    "dotenv": "8.2.0",
+    "eslint": "7.4.0",
+    "eslint-config-standard-with-typescript": "18.0.2",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-standard": "4.0.1",
+    "ts-node-dev": "1.0.0-pre.52",
+    "typescript": "3.9.7"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "0.19.2"
   }
 }
