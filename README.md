@@ -1,6 +1,16 @@
 # SBanken NodeJS Client
 A node module written in Typescript for interacting with SBanken's API.
 
+## Creating your ID and secret
+> If these steps are outdated you can find the updated instructions [here](https://sbanken.no/bruke/utviklerportalen/)
+1. Enable the Beta program on your account.
+  You can do this on the [Beta settings page](https://secure.sbanken.no/Home/Settings/BetaProgram).
+2. Then goto your [API overview page](https://secure.sbanken.no/Personal/ApiBeta/Info) to register a new application.
+3. Create a new application, an application key will be shown on the page.
+  This is your `applicationId` in this module.
+4. Generate a new password, this is your `applicationSecret` in this module.
+5. Your `customerId` is your [norwegian "personnummer" (11 digits)](https://en.wikipedia.org/wiki/National_identification_number#Norway)
+
 ## Usage
 ```typescript
 import { SBanken } from '@sherex/sbanken'
