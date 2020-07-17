@@ -1,13 +1,10 @@
-/* eslint-disable */
-import dotenv from 'dotenv'
-import { SBanken } from './src'
-
-dotenv.config()
+require('dotenv').config()
+const { SBanken } = require('./dist')
 
 const client = new SBanken({
-  applicationId: process.env.SB_APPLICATION_ID!,
-  applicationSecret: process.env.SB_APPLICATION_SECRET!,
-  customerId: process.env.SB_CUSTOMER_ID!
+  applicationId: process.env.SB_APPLICATION_ID,
+  applicationSecret: process.env.SB_APPLICATION_SECRET,
+  customerId: process.env.SB_CUSTOMER_ID
 })
 
 ;(async () => {
@@ -20,7 +17,7 @@ const client = new SBanken({
   console.log(`${customer.firstName} ${customer.lastName}`)
 
   console.log('##### Transactions')
-  const transactions = await client.getTransactions(accounts[0].accountId!, {
+  const transactions = await client.getTransactions(accounts[0].accountId, {
     startDate: '2020-04-01',
     endDate: '2020-06-14',
     index: '20',
