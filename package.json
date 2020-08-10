@@ -1,6 +1,6 @@
 {
   "name": "@sherex/sbanken",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A node module written in Typescript for interacting with SBanken's API",
   "main": "dist/index.js",
   "files": [
