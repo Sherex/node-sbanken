@@ -102,6 +102,39 @@ const client = new SBanken(options)
 
 </details>
 
+## Code API
+> Hot tip! Use an IDE with Typescript support to get auto-complete for all parameters and data returned. I recommend VSCode.
+
+### new SBanken(options)
+Create a new SBanken client. Used in the following calls.
+
+### SBanken#getToken(): [TokenData](./src/types/sbanken-api.types.ts#L19)
+Returns the token and information about it.
+
+### SBanken#getAccounts(): [Account[]](./src/types/accounts-sbanken.types.ts)
+Returns all of your accounts.
+
+### SBanken#getAccount(accountId): [Account](./src/types/accounts-sbanken.types.ts)
+Returns specified account.
+
+| Parameter | Type | Default | Description |
+| --------- | ---- | ------- | ----------- |
+| accountId | string | undefined | An account ID you got from .getAccounts(). Not your account number. |
+
+### SBanken#getTransactions(accountId, options?): [Transaction](./src/types/transactions-sbanken.types.ts)
+Returns transactions for specified account ID, within constraints in `options`.
+
+| Parameter | Type | Default | Description |
+| --------- | ---- | ------- | ----------- |
+| accountId | string | undefined | An account ID you got from .getAccounts(). Not an account number. |
+| options.startDate | string | `endDate` -30 days | Date part of ISO-8601 [`2020-07-11`]. The start of the query time span. Must be less than or equal to `endDate`, and less than or equal to the current date +1 day. |
+| options.endDate | string | current date | Date part of ISO-8601 [`2020-08-10`]. The end of the query time span. Must be greater than or equal to `startDate`, and less than or equal to the current date +1 day. |
+| options.index | string | '0' | The index of the first item to be retrieved, within the time span. |
+| options.length | string | '100' | Return a number of items items up to this value, starting from `options.index`. |
+
+### SBanken#getCustomer(): [Customer](./src/types/customers-sbanken.types.ts)
+Get information about you as a customer.
+
 ## Currently supported APIs
 ### Bank - [Swagger docs](https://api.sbanken.no/exec.bank/swagger/index.html)
 - [X] [Accounts](https://api.sbanken.no/exec.bank/swagger/accounts_v1/swagger.json)
