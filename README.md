@@ -1,9 +1,17 @@
-# SBanken NodeJS Client
-[![GitHub Workflow Tests](https://img.shields.io/github/workflow/status/sherex/node-sbanken/Tests?label=Tests&style=for-the-badge)](https://github.com/Sherex/node-sbanken)[![GitHub Workflow Publish](https://img.shields.io/github/workflow/status/sherex/node-sbanken/Publish?label=Publish&style=for-the-badge)](https://github.com/Sherex/node-sbanken)[![NPM Version](https://img.shields.io/npm/v/@sherex/sbanken?style=for-the-badge)](https://www.npmjs.com/package/@sherex/sbanken)  
+<h1 align=center >SBanken NodeJS Client</h1>
+<div align="center">
+  <img src="https://img.shields.io/github/workflow/status/sherex/node-sbanken/Tests?label=Tests&style=for-the-badge"/><img src="https://img.shields.io/github/workflow/status/sherex/node-sbanken/Publish?label=Publish&style=for-the-badge"/><img src="https://img.shields.io/npm/v/@sherex/sbanken?style=for-the-badge&color=success"/>
+</div>
+<div align="center">
+  <a href="https://github.com/Sherex/node-sbanken"><img src="https://img.shields.io/static/v1?logo=github&label=&message=GITHUB&color=black&style=for-the-badge"/></a><a href=""><img src="https://img.shields.io/static/v1?logo=npm&label=&message=NPM&color=red&style=for-the-badge"/></a>
+</div>
 
-A node module written in Typescript for interacting with SBanken's API.
+<br>
+<p align=center style="font-size: 1.3em;" >A node module written in Typescript to interact with SBanken's API.</p>
+<br>
 
-## Creating your ID and secret
+## Setup
+### Creating your ID and secret
 > If these steps are outdated you can find the updated instructions [here](https://sbanken.no/bruke/utviklerportalen/) and please create an issue or PR here :)
 1. Enable the Beta program on your account.
   You can do this on the [Beta settings page](https://secure.sbanken.no/Home/Settings/BetaProgram).
@@ -14,7 +22,14 @@ A node module written in Typescript for interacting with SBanken's API.
 5. Your `customerId` is your [norwegian "personnummer" (11 digits)](https://en.wikipedia.org/wiki/National_identification_number#Norway)
 
 ## Usage
+### Install
+`$ npm i @sherex/sbanken`
+
 ### Typescript
+
+<details>
+  <summary>Example</summary>
+
 ```typescript
 import { SBanken, ClientParamOptions } from '@sherex/sbanken'
 
@@ -47,7 +62,13 @@ const client = new SBanken(options)
 })()
 ```
 
+</details>
+
 ### Javascript
+
+<details>
+  <summary>Example</summary>
+
 ```javascript
 const { SBanken } = require('@sherex/sbanken')
 
@@ -78,6 +99,8 @@ const client = new SBanken(options)
   console.log(transactions.length)
 })()
 ```
+
+</details>
 
 ## Currently supported APIs
 ### Bank - [Swagger docs](https://api.sbanken.no/exec.bank/swagger/index.html)
