@@ -31,16 +31,16 @@
   "license": "MIT",
   "devDependencies": {
     "@manifoldco/swagger-to-ts": "2.0.0",
-    "@types/node": "14.0.23",
-    "@typescript-eslint/eslint-plugin": "3.6.1",
+    "@types/node": "14.0.27",
+    "@typescript-eslint/eslint-plugin": "3.9.0",
     "dotenv": "8.2.0",
-    "eslint": "7.4.0",
+    "eslint": "7.6.0",
     "eslint-config-standard-with-typescript": "18.0.2",
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-standard": "4.0.1",
-    "ts-node-dev": "1.0.0-pre.52",
+    "ts-node-dev": "1.0.0-pre.56",
     "typescript": "3.9.7"
   },
   "dependencies": {
