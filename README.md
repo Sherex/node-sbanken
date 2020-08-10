@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/github/workflow/status/sherex/node-sbanken/Tests?label=Tests&style=for-the-badge"/><img src="https://img.shields.io/github/workflow/status/sherex/node-sbanken/Publish?label=Publish&style=for-the-badge"/><img src="https://img.shields.io/npm/v/@sherex/sbanken?style=for-the-badge&color=success"/>
 </div>
 <div align="center">
-  <a href="https://github.com/Sherex/node-sbanken"><img src="https://img.shields.io/static/v1?logo=github&label=&message=GITHUB&color=black&style=for-the-badge"/></a><a href=""><img src="https://img.shields.io/static/v1?logo=npm&label=&message=NPM&color=red&style=for-the-badge"/></a>
+  <a href="https://github.com/Sherex/node-sbanken"><img src="https://img.shields.io/static/v1?logo=github&label=&message=GITHUB&color=black&style=for-the-badge"/></a><a href="https://www.npmjs.com/package/@sherex/sbanken"><img src="https://img.shields.io/static/v1?logo=npm&label=&message=NPM&color=red&style=for-the-badge"/></a>
 </div>
 
 <br>
