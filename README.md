@@ -23,7 +23,7 @@
 
 ## Usage
 ### Install
-`$ npm i @sherex/sbanken`
+`npm i @sherex/sbanken`
 
 ### Typescript
 
@@ -150,10 +150,10 @@ Get information about you as a customer.
 
 ## Development
 ```sh
-$ git clone https://github.com/Sherex/node-sbanken
-$ cd node-sbanken
-$ npm i
-$ npm run dev sandbox.ts
+git clone https://github.com/Sherex/node-sbanken
+cd node-sbanken
+npm i
+npm run dev sandbox.ts
 ```
 
 ### Updating swaggers and typings
