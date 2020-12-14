@@ -76,3 +76,11 @@ export class APIError extends Error {
     this.sbankenError = sbankenError
   }
 }
+
+export class AuthError extends Error {
+  public readonly sbankenError: ErrorBody
+  constructor (message: string | undefined, sbankenError: ErrorBody) {
+    super(message)
+    this.sbankenError = sbankenError
+  }
+}

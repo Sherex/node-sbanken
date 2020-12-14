@@ -47,6 +47,11 @@ export default class SBankenClient {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
+    }).catch(error => {
+      if (error.response?.data?.error === 'invalid_client') {
+        throw new SBanken.AuthError('Invalid credentials, are they expired?', error.response?.data?.error)
+      }
+      throw error
     })
     const tokenResponse = response.data as TokenAPIResponse
 
@@ -55,7 +60,7 @@ export default class SBankenClient {
       accessToken: tokenResponse.access_token,
       tokenType: tokenResponse.token_type,
       expires: Date.now() + (tokenResponse.expires_in - expiresBuffer),
-      scopes: response.data.scope.split(' ')
+      scopes: tokenResponse.scope.split(' ') as SBanken.TokenData['scopes']
     }
 
     if (this.tokenData.tokenType.match(/bearer/i) === null) throw Error(`Received unknown token from API: "${this.tokenData.tokenType}"`)
