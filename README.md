@@ -122,14 +122,14 @@ Returns specified account.
 
 | Parameter | Type | Default | Description |
 | --------- | ---- | ------- | ----------- |
-| accountId | string | undefined | An account ID you got from .getAccounts(). Not your account number. |
+| accountId | string | undefined | An account ID you got from .getAccounts() or your account number. |
 
 ### SBanken#getTransactions(accountId, options?): [Transaction](./src/types/transactions-sbanken.types.ts)
 Returns transactions for specified account ID, within constraints in `options`.
 
 | Parameter | Type | Default | Description |
 | --------- | ---- | ------- | ----------- |
-| accountId | string | undefined | An account ID you got from .getAccounts(). Not an account number. |
+| accountId | string | undefined | An account ID you got from .getAccounts() or an account number (If you use an account number, it will use `.getAccount()` to get the `accountId`). |
 | options.startDate | string | `endDate` -30 days | Date part of ISO-8601 [`2020-07-11`]. The start of the query time span. Must be less than or equal to `endDate`, and less than or equal to the current date +1 day. |
 | options.endDate | string | current date | Date part of ISO-8601 [`2020-08-10`]. The end of the query time span. Must be greater than or equal to `startDate`, and less than or equal to the current date +1 day. |
 | options.index | string | '0' | The index of the first item to be retrieved, within the time span. |

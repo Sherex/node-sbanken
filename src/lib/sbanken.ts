@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import * as SBanken from '../types/sbanken.types'
+import { isAccountNumber } from '../lib/type-checkers'
 import toUrlEncodedFormData from './to-url-encoded-form-data'
 import {
   TokenAPIResponse,
@@ -87,6 +88,14 @@ export default class SBankenClient {
 
   async getAccount (accountId: string): Promise<Account> {
     if (typeof accountId !== 'string') throw new Error('Missing required argument \'accountId\'!')
+
+    if (isAccountNumber(accountId)) {
+      const accounts = await this.getAccounts()
+      const account = accounts.find(account => account.accountNumber === accountId)
+      if (account === undefined) throw new Error('Invalid accountId!')
+      return account
+    }
+
     await this.updateClientToken()
     const response = await this.client.get(`/exec.bank/api/v1/accounts/${accountId}`)
     const data = response.data as APIAccount
@@ -108,6 +117,13 @@ export default class SBankenClient {
 
   async getTransactions (accountId: string, options?: SBanken.TransactionParamOptions): Promise<Transaction[]> {
     if (typeof accountId !== 'string') throw new Error('Missing required argument \'accountId\'!')
+
+    if (isAccountNumber(accountId)) {
+      const account = await this.getAccount(accountId)
+      if (typeof account.accountId !== 'string') throw new Error('Account did not contain accountId. This is most likely an API error.')
+      accountId = account.accountId
+    }
+
     await this.updateClientToken()
     let query = toUrlEncodedFormData({
       startDate: options?.startDate,
