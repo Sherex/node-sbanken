@@ -18,6 +18,9 @@
 2. Then goto your [API overview page](https://secure.sbanken.no/Personal/ApiBeta/Info) to register a new application.
 3. Create a new application, an application key will be shown on the page.
   This is your `applicationId` in this module.
+
+  > **Note:** Sometimes the API will respond with `{ error: "invalid_client" }` with the new secret, just give it a few miutes to catch up.
+
 4. Generate a new password, this is your `applicationSecret` in this module.
 5. Your `customerId` is your [norwegian "personnummer" (11 digits)](https://en.wikipedia.org/wiki/National_identification_number#Norway)
 
